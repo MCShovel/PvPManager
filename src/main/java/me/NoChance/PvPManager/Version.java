@@ -2,7 +2,7 @@ package me.NoChance.PvPManager;
 
 public final class Version {
 
-	private static final String CONFIG_VERSION = "${config.version}";
+	private static final String CONFIG_VERSION = "3.3.3";
 
 	private Version() {
 	}

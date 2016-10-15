@@ -1,9 +1,9 @@
-name: ${project.artifactId}
-main: ${project.groupId}.PvPManager
-version: ${pvpmanager.version}
+name: PvPManager
+main: me.NoChance.PvPManager.PvPManager
+version: 3.3.3
 author: NoChanceSD
 description: Allows Administrators To Change Their PvP Mechanics.
-softdepend: [Vault, WorldGuard, DisguiseCraft, LibsDisguises, Factions, EZRanksLite, Essentials]
+softdepend: [Vault]
 
 commands:
    pvpmanager:

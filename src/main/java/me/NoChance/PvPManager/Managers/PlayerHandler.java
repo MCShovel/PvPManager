@@ -10,8 +10,6 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import me.NoChance.PvPManager.PvPManager;
 import me.NoChance.PvPManager.PvPlayer;
-import me.NoChance.PvPManager.Dependencies.Hook;
-import me.NoChance.PvPManager.Dependencies.Hooks.WorldGuard;
 import me.NoChance.PvPManager.Player.CancelResult;
 import me.NoChance.PvPManager.Settings.Settings;
 import me.NoChance.PvPManager.Tasks.CleanKillersTask;
@@ -24,13 +22,11 @@ public class PlayerHandler {
 	private final DependencyManager dependencyManager;
 	private final PvPManager plugin;
 	private final TagTask tagTask = new TagTask();
-	private final WorldGuard worldguard;
 
 	public PlayerHandler(final PvPManager plugin) {
 		this.plugin = plugin;
 		this.configManager = plugin.getConfigM();
 		this.dependencyManager = plugin.getDependencyManager();
-		worldguard = (WorldGuard) dependencyManager.getDependency(Hook.WORLDGUARD);
 		if (Settings.isKillAbuseEnabled()) {
 			new CleanKillersTask(this).runTaskTimer(plugin, 0, Settings.getKillAbuseTime() * 20);
 		}
@@ -48,15 +44,7 @@ public class PlayerHandler {
 			return CancelResult.RESPAWN_PROTECTION;
 		if (attacked.isNewbie() || attacker.isNewbie())
 			return CancelResult.NEWBIE.setAttackerCaused(attacker.isNewbie());
-		if (!attacker.hasPvPEnabled() || !attacked.hasPvPEnabled()) {
-			if (Settings.isWorldguardOverrides() && worldguard != null && worldguard.hasAllowPvPFlag(defender)) {
-				attacker.setPvP(true); // TODO Make messages configurable
-				attacker.message("§cYour PvP was enabled because you entered a PvP allowed region");
-				attacked.setPvP(true);
-				attacked.message("§cYour PvP was enabled because you entered a PvP allowed region");
-			}
-			return CancelResult.PVPDISABLED.setAttackerCaused(!attacker.hasPvPEnabled());
-		}
+		
 		return CancelResult.FAIL;
 	}
 

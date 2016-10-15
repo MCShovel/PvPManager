@@ -22,7 +22,6 @@ import me.NoChance.PvPManager.Libraries.Updater.Updater.UpdateType;
 import me.NoChance.PvPManager.Listeners.EntityListener;
 import me.NoChance.PvPManager.Listeners.PlayerListener;
 import me.NoChance.PvPManager.Listeners.PlayerMoveListener;
-import me.NoChance.PvPManager.Listeners.WGListener;
 import me.NoChance.PvPManager.Managers.ConfigManager;
 import me.NoChance.PvPManager.Managers.DependencyManager;
 import me.NoChance.PvPManager.Managers.PlayerHandler;
@@ -80,7 +79,6 @@ public final class PvPManager extends JavaPlugin {
 			if (Settings.borderHoppingPushback()) {
 				registerListener(new PlayerMoveListener(playerHandler));
 			}
-			registerListener(new WGListener(playerHandler));
 		}
 	}
 

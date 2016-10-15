@@ -150,7 +150,7 @@ Update Check:
   Auto Update: true
 
 Metrics:
-  Opt-out: false
+  Opt-out: true
 
 # Informs PvPManager if the config is updated, do not touch it unless you want to reset the config
-Config Version: ${config.version}
+Config Version: 3.3.3

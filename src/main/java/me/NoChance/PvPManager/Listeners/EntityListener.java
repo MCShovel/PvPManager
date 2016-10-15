@@ -17,35 +17,21 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import com.earth2me.essentials.Essentials;
-import com.sk89q.commandbook.CommandBook;
-import com.sk89q.commandbook.GodComponent;
-
 import me.NoChance.PvPManager.PvPlayer;
 import me.NoChance.PvPManager.Managers.PlayerHandler;
 import me.NoChance.PvPManager.Player.CancelResult;
 import me.NoChance.PvPManager.Settings.Messages;
 import me.NoChance.PvPManager.Settings.Settings;
 import me.NoChance.PvPManager.Utils.CombatUtils;
-import me.libraryaddict.disguise.DisguiseAPI;
-import pgDev.bukkit.DisguiseCraft.DisguiseCraft;
 
 public class EntityListener implements Listener {
 
 	private final PlayerHandler ph;
-	private GodComponent gc;
-	private Essentials ess;
 
 	public EntityListener(final PlayerHandler ph) {
 		this.ph = ph;
-		if (Bukkit.getPluginManager().isPluginEnabled("CommandBook")) {
-			this.gc = (GodComponent) CommandBook.inst().getComponentManager().getComponent("god");
-		}
-		if (Bukkit.getPluginManager().isPluginEnabled("Essentials")) {
-			this.ess = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
-		}
 	}
-
+	
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public final void onPlayerDamage(final EntityDamageByEntityEvent event) { // NO_UCD
 		if (!CombatUtils.isWorldAllowed(event.getEntity().getWorld().getName()))
@@ -143,24 +129,12 @@ public class EntityListener implements Listener {
 			if (Settings.isDisableGamemode() && !attacker.getGameMode().equals(GameMode.SURVIVAL)) {
 				attacker.setGameMode(GameMode.SURVIVAL);
 			}
-			if (Settings.isDisableDisguise()) {
-				if (Bukkit.getPluginManager().isPluginEnabled("DisguiseCraft") && DisguiseCraft.getAPI().isDisguised(attacker)) {
-					DisguiseCraft.getAPI().undisguisePlayer(attacker);
-				}
-				if (Bukkit.getPluginManager().isPluginEnabled("LibsDisguises") && DisguiseAPI.isDisguised(attacker)) {
-					DisguiseAPI.undisguiseToAll(attacker);
-				}
-			}
 			if (Settings.isDisableInvisibility() && attacker.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
 				attacker.removePotionEffect(PotionEffectType.INVISIBILITY);
 			}
 			if (Settings.isDisableGodMode()) {
-				if (gc != null && gc.hasGodMode(attacker)) {
-					gc.disableGodMode(attacker);
-				}
-				if (ess != null && ess.getUser(attacker).isGodModeEnabled()) {
-					ess.getUser(attacker).setGodModeEnabled(false);
-				}
+				if (attacker.isInvulnerable())
+					attacker.setInvulnerable(false);
 			}
 		}
 		if (Settings.isInCombatEnabled()) {
