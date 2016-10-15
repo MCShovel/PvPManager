@@ -9,6 +9,14 @@ commands:
    pvpmanager:
       description: Shows Main PvPManager Page.
       aliases: [pm, pvpm]
+   tag:
+      description: Shows time left until out of combat
+      aliases: [ct, pt, pvptag]
+   announce:
+      description: Broadcasts a message to all players with color support
+      permission: pvpmanager.admin
+
+ignored:
    pvp:
       description: Change your PvP Status.
       aliases: [toggle, pvptoggle]
@@ -31,12 +39,6 @@ commands:
       description: List all players with pvp enabled
       aliases: [plist, pvpl]
       permission: pvpmanager.list
-   tag:
-      description: Shows time left until out of combat
-      aliases: [ct, pt, pvptag]
-   announce:
-      description: Broadcasts a message to all players with color support
-      permission: pvpmanager.admin
 
 permissions:
    pvpmanager.*:

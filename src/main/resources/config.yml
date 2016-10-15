@@ -153,4 +153,4 @@ Metrics:
   Opt-out: true
 
 # Informs PvPManager if the config is updated, do not touch it unless you want to reset the config
-Config Version: 3.3.3
+Config Version: 99

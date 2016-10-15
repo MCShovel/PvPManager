@@ -12,7 +12,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import me.NoChance.PvPManager.PvPManager;
 import me.NoChance.PvPManager.PvPlayer;
@@ -75,14 +74,6 @@ public class ConfigManager {
 		} else {
 			initConfig();
 		}
-		if (Settings.isUpdateCheck()) {
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					plugin.checkForUpdates();
-				}
-			}.runTaskTimerAsynchronously(plugin, 0, 360000);
-		}
 	}
 
 	private void initConfig() {
@@ -121,8 +112,9 @@ public class ConfigManager {
 	}
 
 	public final void saveUser(final PvPlayer player) {
+	/*
 		// check if we really need to save this player
-		if (player.isNewbie() == false && player.hasPvPEnabled() == Settings.isDefaultPvp() && CombatUtils.hasTimePassed(player.getToggleTime(), Settings.getToggleCooldown())) {
+		if (player.isNewbie() == false && CombatUtils.hasTimePassed(player.getToggleTime(), Settings.getToggleCooldown())) {
 			// clear entry for this user if there is one
 			if (getUserStorage().contains(player.getUUID().toString())) {
 				getUserStorage().set(player.getUUID().toString(), null);
@@ -133,9 +125,10 @@ public class ConfigManager {
 
 		getUserStorage().createSection(player.getUUID().toString(), player.getUserData());
 		saveUsersToDisk();
+	*/
 	}
 
-	private void saveUsersToDisk() {
+	/* private void saveUsersToDisk() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -148,7 +141,7 @@ public class ConfigManager {
 				}
 			}
 		}).start();
-	}
+	} */
 
 	public final FileConfiguration getConfig() {
 		return config;

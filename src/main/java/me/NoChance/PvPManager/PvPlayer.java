@@ -93,7 +93,7 @@ public class PvPlayer extends EcoPlayer {
 	}
 
 	public final boolean hasPvPEnabled() {
-		return this.pvpState;
+		return this.pvpState && getPlayer().hasPermission("pvpmanager.nopvp") == false;
 	}
 
 	public final boolean hasPvPLogged() {
@@ -234,9 +234,10 @@ public class PvPlayer extends EcoPlayer {
 	}
 
 	public final void loadState() {
-		if (!getPlayer().isOp() && getPlayer().hasPermission("pvpmanager.nopvp")) {
-			this.pvpState = false;
-		} else if (!getPlayer().hasPlayedBefore()) {
+		//if (!getPlayer().isOp() && getPlayer().hasPermission("pvpmanager.nopvp")) {
+		//	this.pvpState = false;
+		//} else
+		if (!getPlayer().hasPlayedBefore()) {
 			if (Settings.isNewbieProtectionEnabled()) {
 				setNewbie(true);
 			}
@@ -268,7 +269,7 @@ public class PvPlayer extends EcoPlayer {
 
 	public final Map<String, Object> getUserData() {
 		final Map<String, Object> userData = new HashMap<>();
-		userData.put(UserDataFields.PVP_STATUS, hasPvPEnabled());
+		userData.put(UserDataFields.PVP_STATUS, this.pvpState);
 		userData.put(UserDataFields.TOGGLE_TIME, getToggleTime());
 		userData.put(UserDataFields.NEWBIE, isNewbie());
 		userData.put(UserDataFields.NEWBIE_TIMELEFT, newbieTask != null ? newbieTask.getTimeleft() : 0);

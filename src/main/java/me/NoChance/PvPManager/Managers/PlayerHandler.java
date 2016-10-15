@@ -45,6 +45,9 @@ public class PlayerHandler {
 		if (attacked.isNewbie() || attacker.isNewbie())
 			return CancelResult.NEWBIE.setAttackerCaused(attacker.isNewbie());
 		
+		if (!attacker.hasPvPEnabled() || !attacked.hasPvPEnabled())
+			return CancelResult.PVPDISABLED.setAttackerCaused(!attacker.hasPvPEnabled());
+		
 		return CancelResult.FAIL;
 	}
 

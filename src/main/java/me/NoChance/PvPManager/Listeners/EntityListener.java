@@ -1,6 +1,5 @@
 package me.NoChance.PvPManager.Listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
