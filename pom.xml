@@ -1,66 +1,42 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>me.NoChance.PvPManager</groupId>
-	<artifactId>PvPManager-parent</artifactId>
-	<packaging>pom</packaging>
+	<artifactId>PvPManager</artifactId>
 	<version>3.3.3</version>
+
+	<build>
+		<finalName>PvPManager</finalName>
+	</build>
+
+	<!-- Dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.9-SNAPSHOT</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/../spigot/spigot.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>com.sk89q.worldedit</groupId>
+			<artifactId>worldedit-bukkit</artifactId>
+			<version>14.6</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/../../plugins/worldedit-bukkit/worldedit-bukkit.jar</systemPath>
+		</dependency>
+		<dependency>
+			<groupId>net.milkbowl.vault</groupId>
+			<artifactId>Vault</artifactId>
+			<version>1.2.32</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/../../plugins/Vault/Vault.jar</systemPath>
+		</dependency>
+	</dependencies>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<pvpmanager.version>${project.version}</pvpmanager.version>
-		<config.version>46</config.version>
-		<powermock.version>1.6.5</powermock.version>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 
-	<prerequisites>
-		<maven>3.3.9</maven>
-	</prerequisites>
-
-	<modules>
-		<module>PvPManager</module>
-	</modules>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<configuration>
-							<excludeReactor>false</excludeReactor>
-							<autoLinkItems>true</autoLinkItems>
-							<allowMajorUpdates>true</allowMajorUpdates>
-							<allowMinorUpdates>true</allowMinorUpdates>
-							<allowSnapshots>true</allowSnapshots>
-						</configuration>
-						<phase>pre-clean</phase>
-						<goals>
-							<goal>display-plugin-updates</goal>
-							<goal>display-dependency-updates</goal>
-							<goal>display-parent-updates</goal>
-							<goal>use-latest-versions</goal>
-							<goal>update-child-modules</goal>
-							<goal>update-properties</goal>
-							<goal>update-parent</goal>
-							<goal>commit</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<optimize>true</optimize>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>
