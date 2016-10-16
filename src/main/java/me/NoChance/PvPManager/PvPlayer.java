@@ -1,8 +1,11 @@
 package me.NoChance.PvPManager;
 
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -193,7 +196,12 @@ public class PvPlayer extends EcoPlayer {
 				totalKills++;
 				victim.put(victimName, totalKills);
 			}
-			if (totalKills >= Settings.getKillAbuseMaxKills()) {
+			else if (totalKills == Settings.getKillAbuseMaxKills()) {
+				totalKills++;
+				victim.put(victimName, totalKills);
+				message(ChatColor.translateAlternateColorCodes('&', "&cWARNING: You will be kicked if you kill them again."));
+			}
+			else if (totalKills > Settings.getKillAbuseMaxKills()) {
 				unTag();
 				for (final String command : Settings.getKillAbuseCommands()) {
 					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("<player>", getName()));
@@ -203,7 +211,20 @@ public class PvPlayer extends EcoPlayer {
 	}
 
 	public final void clearVictims() {
-		victim.clear();
+		if (victim.size() > 0) {
+			String[] keys = new String[victim.size()];
+			keys = victim.keySet().toArray(keys);
+			for (String v : keys) {
+				int val = victim.get(v);
+				if (val < 1) {
+					victim.remove(v);
+				}
+				else {
+					victim.put(v, val - 1);
+				}
+			}
+			victim.clear();
+		}
 	}
 
 	public final void setPvpLogged(final boolean pvpLogged) {
