@@ -111,7 +111,7 @@ public class EntityListener implements Listener {
 	private void onDamageActions(final Player attacker, final Player defender) {
 		final PvPlayer pvpAttacker = ph.get(attacker);
 		final PvPlayer pvpDefender = ph.get(defender);
-		if (pvpAttacker == null || pvpDefender == null)
+		if (pvpAttacker == null || pvpDefender == null || pvpAttacker == pvpDefender)
 			return;
 		if (Settings.isPvpBlood()) {
 			defender.getWorld().playEffect(defender.getLocation(), Effect.STEP_SOUND, Material.REDSTONE_BLOCK);
