@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -16,6 +17,7 @@ public final class Settings {
 	}
 
 	private static int configVersion;
+	private static String minecraftVersion;
 	private static boolean autoUpdate;
 	private static boolean blockEnderPearl;
 	private static boolean blockTeleport;
@@ -105,6 +107,7 @@ public final class Settings {
 	public static void initizalizeVariables(final Config c) {
 		assignSections(c);
 
+		minecraftVersion = Bukkit.getBukkitVersion().isEmpty() ? "1.7" : Bukkit.getBukkitVersion().replaceAll("-.+", "");
 		locale = GENERAL.getString("Locale", "en").toUpperCase();
 		defaultPvp = GENERAL.getBoolean("Default PvP", true);
 		pvpBlood = GENERAL.getBoolean("PvP Blood", true);
@@ -445,6 +448,10 @@ public final class Settings {
 		return borderHoppingPushback;
 	}
 
+	public static void setBorderHoppingPushback(final boolean borderHoppingPushback) {
+		Settings.borderHoppingPushback = borderHoppingPushback;
+	}
+
 	public static boolean isStopCommands() {
 		return stopCommands;
 	}
@@ -527,5 +534,9 @@ public final class Settings {
 
 	public static boolean blockInteract() {
 		return blockInteractInCombat;
+	}
+
+	public static String getMinecraftVersion() {
+		return minecraftVersion;
 	}
 }

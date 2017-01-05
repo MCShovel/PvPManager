@@ -142,7 +142,7 @@ public class PvPlayer extends EcoPlayer {
 		if (Settings.isUseNameTag()) {
 			teamProfile.setInCombat();
 		}
-		if (Settings.isGlowingInCombat() && (Bukkit.getBukkitVersion().startsWith("1.9") || Bukkit.getBukkitVersion().startsWith("1.10"))) {
+		if (Settings.isGlowingInCombat() && CombatUtils.isVersionSuperior(Settings.getMinecraftVersion(), "1.8.8")) {
 			getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Settings.getTimeInCombat() * 20, 1));
 		}
 
