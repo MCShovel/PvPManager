@@ -15,30 +15,30 @@ commands:
    announce:
       description: Broadcasts a message to all players with color support
       permission: pvpmanager.admin
-
-ignored:
    pvp:
       description: Change your PvP Status.
       aliases: [toggle, pvptoggle]
       usage: "Usage: /<command> [on|off] or /<command> [player] [on|off]"
-   pvpoverride:
-      description: Allows the player to attack everyone everywhere
-      aliases: [pvpo, povd]
-      permission: pvpmanager.override
    pvpinfo:
       description: Allows the player to see his or others information
-      aliases: [pvpi, pi]
+      aliases: [pvpi]
       permission: pvpmanager.info
       usage: "Usage: /<command> [player]"
    pvpstatus:
       description: Allows the player to see his or others pvp status
-      aliases: [pvps, ps, pstatus, status]
+      aliases: [pvps]
       permission: pvpmanager.pvpstatus.self
       usage: "Usage: /<command> [player]"
    pvplist:
       description: List all players with pvp enabled
-      aliases: [plist, pvpl]
+      aliases: [pvpl]
       permission: pvpmanager.list
+
+ignored:
+   pvpoverride:
+      description: Allows the player to attack everyone everywhere
+      aliases: [pvpo, povd]
+      permission: pvpmanager.override
 
 permissions:
    pvpmanager.*:
