@@ -5,9 +5,7 @@ import java.io.File;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.NoChance.PvPManager.Commands.Announce;
-import me.NoChance.PvPManager.Commands.PM;
-import me.NoChance.PvPManager.Commands.Tag;
+import me.NoChance.PvPManager.Commands.*;
 import me.NoChance.PvPManager.Listeners.EntityListener;
 import me.NoChance.PvPManager.Listeners.PlayerListener;
 import me.NoChance.PvPManager.Managers.ConfigManager;
@@ -34,12 +32,12 @@ public final class PvPManager extends JavaPlugin {
 		dependencyManager = new DependencyManager();
 		playerHandler = new PlayerHandler(this);
 		startListeners();
-		// getCommand("pvp").setExecutor(new PvP(playerHandler));
+		getCommand("pvp").setExecutor(new PvP(playerHandler));
 		getCommand("pvpmanager").setExecutor(new PM(this));
 		// getCommand("pvpoverride").setExecutor(new PvPOverride(playerHandler));
-		// getCommand("pvpinfo").setExecutor(new PvPInfo(playerHandler));
-		// getCommand("pvplist").setExecutor(new PvPList(playerHandler));
-		// getCommand("pvpstatus").setExecutor(new PvPStatus(playerHandler));
+		getCommand("pvpinfo").setExecutor(new PvPInfo(playerHandler));
+		getCommand("pvplist").setExecutor(new PvPList(playerHandler));
+		getCommand("pvpstatus").setExecutor(new PvPStatus(playerHandler));
 		getCommand("tag").setExecutor(new Tag(playerHandler));
 		getCommand("announce").setExecutor(new Announce());
 		// startMetrics();
